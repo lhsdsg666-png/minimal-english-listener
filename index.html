@@ -6,519 +6,435 @@
   <meta name="theme-color" content="#FAF7F2">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <title>极简英文 · 听与练 (Minimal English Listener)</title>
+  <meta name="apple-mobile-web-app-title" content="极简听力">
+  <title>极简英文 · 听与练</title>
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body data-theme="warm" data-font="serif">
-  <div id="app">
+
+  <!-- ==================== MAIN APP CONTAINER ==================== -->
+  <div class="app-container" id="appContainer">
     <!-- Top Header -->
-    <header class="app-header">
-      <div class="header-inner">
-        <div class="brand" id="brand-logo" title="返回精听">
-          <div class="brand-icon">
-            <span class="wave-bar"></span>
-            <span class="wave-bar"></span>
-            <span class="wave-bar"></span>
-            <span class="wave-bar"></span>
-          </div>
-          <div class="brand-title">
-            <span class="brand-main">极简听力</span>
-            <span class="brand-sub">精听对照 · 磨耳朵</span>
-          </div>
-        </div>
-
-        <!-- Navigation Tabs -->
-        <nav class="nav-tabs">
-          <button class="nav-tab active" data-view="study" id="tab-study">
-            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
-            <span>精听</span>
-          </button>
-          <button class="nav-tab" data-view="library" id="tab-library">
-            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-            <span>听力库</span>
-          </button>
-          <button class="nav-tab" data-view="vocab" id="tab-vocab">
-            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-            <span>生词本</span>
-            <span class="vocab-badge" id="vocab-count-badge">0</span>
-          </button>
-        </nav>
-
-        <!-- Header Actions -->
-        <div class="header-actions">
-          <button class="btn-icon" id="btn-add-quick" title="新建听力素材">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          </button>
-          <button class="btn-icon" id="btn-theme-toggle" title="切换主题 (暖阳/纯白/夜间)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-          </button>
-          <button class="btn-icon" id="btn-settings-open" title="设置与备份">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-          </button>
-        </div>
+    <header class="top-header" id="topHeader">
+      <div class="brand-title">
+        <span>🎧 极简听力</span>
+        <span class="brand-badge" id="lessonCountBadge">0 篇</span>
+      </div>
+      <div class="header-actions">
+        <button class="btn-icon" id="btnQuickTheme" title="切换主题">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+        <button class="btn-primary" id="btnNewLesson">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          存听力
+        </button>
       </div>
     </header>
 
-    <!-- Main View Switcher -->
-    <main class="app-main">
-      <!-- VIEW 1: STUDY STUDIO (正在精听) -->
-      <section id="view-study" class="view-panel active">
-        <!-- Lesson Top Meta Bar -->
-        <div class="study-meta-card">
-          <div class="meta-row-top">
-            <div class="lesson-badge-group">
-              <span class="badge category-badge" id="study-category">美文听读</span>
-              <span class="badge source-badge" id="study-source-type">本地音频</span>
-              <span class="badge duration-badge" id="study-duration-badge">00:00</span>
-            </div>
-            <div class="meta-actions">
-              <button class="btn-subtle" id="btn-edit-current-lesson" title="编辑当前听力与原文">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-                <span>编辑原文</span>
-              </button>
-              <button class="btn-subtle" id="btn-toggle-translation" title="显示/隐藏译文">
-                <span id="trans-toggle-label">隐藏译文</span>
-              </button>
-            </div>
-          </div>
-          <h1 class="study-title" id="study-title">加载中...</h1>
+    <!-- TAB 1: 听力库 (Library) -->
+    <main class="view-panel active" id="viewLibrary">
+      <div class="section-header">
+        <h2 class="section-title">我的听力库</h2>
+        <span class="section-count" id="libraryTotalCount">0 篇</span>
+      </div>
+
+      <div class="library-toolbar">
+        <input type="text" class="search-input" id="librarySearchInput" placeholder="🔍 搜索听力标题、分类或原文...">
+        <div class="filter-pills" id="libraryFilterPills">
+          <button class="pill active" data-filter="all">全部</button>
+          <button class="pill" data-filter="in_progress">学习中</button>
+          <button class="pill" data-filter="favorite">已收藏</button>
+          <button class="pill" data-filter="completed">已精听</button>
         </div>
+      </div>
 
-        <!-- Mode Bar (对照模式选择) -->
-        <div class="mode-bar">
-          <button class="mode-tab active" data-mode="contrast" id="mode-contrast">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-            <span>精听对照</span>
-          </button>
-          <button class="mode-tab" data-mode="blind" id="mode-blind">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
-            <span>磨耳朵盲听</span>
-          </button>
-          <button class="mode-tab" data-mode="dictation" id="mode-dictation">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
-            <span>听写核对</span>
-          </button>
-        </div>
-
-        <!-- Mode Tip -->
-        <div class="mode-tip-banner" id="mode-tip-banner">
-          <span class="tip-icon">💡</span>
-          <span class="tip-text" id="mode-tip-text">精听对照模式：随音频高亮同步推进，点击任意句子即可单句重放，轻点单词即刻查词发音。</span>
-        </div>
-
-        <!-- Dictation Workspace Area (Only active in dictation mode) -->
-        <div class="dictation-workspace" id="dictation-workspace" style="display: none;">
-          <div class="dictation-card">
-            <div class="dictation-card-header">
-              <span class="dictation-step" id="dictation-step-indicator">第 1 / 4 句</span>
-              <div class="dictation-actions">
-                <button class="btn-sm btn-ghost" id="btn-dictation-replay" title="复读当前句">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
-                  <span>播放当前句</span>
-                </button>
-                <button class="btn-sm btn-ghost" id="btn-dictation-hint" title="提示首字母">
-                  <span>💡 提示</span>
-                </button>
-              </div>
-            </div>
-            <textarea id="dictation-input" placeholder="请在此输入你听到的英文句子，听完后点击下方「核对对照」..." rows="3"></textarea>
-            
-            <div class="dictation-btn-group">
-              <button class="btn-primary" id="btn-check-dictation">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                <span>核对对照</span>
-              </button>
-              <button class="btn-secondary" id="btn-next-dictation">
-                <span>下一句 ➔</span>
-              </button>
-            </div>
-
-            <!-- Diff Compare Result -->
-            <div class="dictation-diff-panel" id="dictation-diff-panel" style="display: none;">
-              <div class="diff-header">
-                <span class="diff-title">听写核对结果</span>
-                <span class="diff-accuracy" id="diff-accuracy-badge">准确率: 0%</span>
-              </div>
-              <div class="diff-content" id="diff-content"></div>
-              <div class="diff-original-trans" id="diff-original-trans"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Transcript Content Area -->
-        <div class="transcript-container" id="transcript-container">
-          <div class="sentences-list" id="sentences-list">
-            <!-- Dynamically populated sentence cards -->
-          </div>
-        </div>
-      </section>
-
-      <!-- VIEW 2: LIBRARY (听力库) -->
-      <section id="view-library" class="view-panel">
-        <div class="library-header">
-          <div class="library-title-row">
-            <div>
-              <h2 class="section-title">我的听力库</h2>
-              <p class="section-subtitle">存储你的听力素材与原文，随时沉浸对照磨耳朵</p>
-            </div>
-            <button class="btn-primary" id="btn-add-lesson">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-              <span>新增听力素材</span>
-            </button>
-          </div>
-
-          <!-- Search & Filter Bar -->
-          <div class="filter-bar">
-            <div class="search-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-              <input type="text" id="library-search-input" placeholder="搜索素材标题、分类或原文内容...">
-            </div>
-            <div class="filter-pills" id="library-filter-pills">
-              <button class="pill active" data-filter="all">全部</button>
-              <button class="pill" data-filter="in_progress">学习中</button>
-              <button class="pill" data-filter="favorite">已收藏</button>
-              <button class="pill" data-filter="completed">已精听</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="library-cards-grid" id="library-cards-grid">
-          <!-- Lesson cards injected by JS -->
-        </div>
-      </section>
-
-      <!-- VIEW 3: VOCABULARY (生词本) -->
-      <section id="view-vocab" class="view-panel">
-        <div class="vocab-header">
-          <div class="library-title-row">
-            <div>
-              <h2 class="section-title">听力生词本</h2>
-              <p class="section-subtitle">精听时点击沉淀的生词与原声原句上下文</p>
-            </div>
-            <div class="vocab-top-actions">
-              <button class="btn-secondary btn-sm" id="btn-export-vocab">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                <span>导出生词</span>
-              </button>
-              <button class="btn-subtle btn-sm" id="btn-clear-vocab" title="清空生词">
-                <span>清空</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="search-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input type="text" id="vocab-search-input" placeholder="搜索生词或释义...">
-          </div>
-        </div>
-
-        <div class="vocab-list" id="vocab-list">
-          <!-- Vocab items injected by JS -->
-        </div>
-      </section>
+      <div class="lesson-list" id="lessonListContainer">
+        <!-- Rendered dynamically -->
+      </div>
     </main>
 
-    <!-- FLOATING BOTTOM AUDIO PLAYER -->
-    <div class="audio-player-bar" id="audio-player-bar">
-      <!-- Drag Scrubber Timeline -->
-      <div class="timeline-container" id="timeline-container">
-        <div class="timeline-track" id="timeline-track">
-          <div class="timeline-buffered" id="timeline-buffered"></div>
-          <div class="timeline-progress" id="timeline-progress"></div>
-          <div class="timeline-ab-segment" id="timeline-ab-segment"></div>
-          <div class="timeline-thumb" id="timeline-thumb"></div>
-        </div>
-        <div class="timeline-time-row">
-          <span class="time-label" id="time-current">00:00</span>
-          <span class="time-label" id="sentence-jump-hint">句 1 / 4</span>
-          <span class="time-label" id="time-duration">00:00</span>
+    <!-- TAB 2: 生词本 (Vocabulary) -->
+    <main class="view-panel" id="viewVocab">
+      <div class="section-header">
+        <h2 class="section-title">我的生词本</h2>
+        <span class="section-count" id="vocabTotalCount">0 词</span>
+      </div>
+
+      <div class="library-toolbar">
+        <input type="text" class="search-input" id="vocabSearchInput" placeholder="🔍 搜索生词或释义...">
+        <div class="vocab-actions-row">
+          <button class="btn-secondary btn-sm" id="btnExportVocab">导出文本</button>
+          <button class="btn-subtle btn-sm" id="btnClearVocab">清空</button>
         </div>
       </div>
 
-      <!-- Controls Main Row -->
-      <div class="player-controls-row">
-        <!-- Left Quick Actions -->
-        <div class="player-group player-group-left">
-          <button class="ctrl-btn-subtle" id="btn-ab-loop" title="A-B 片段循环复读 (点击设置A点，再点击设置B点)">
-            <span class="btn-text-badge" id="ab-loop-label">A-B</span>
-          </button>
-          <button class="ctrl-btn-subtle" id="btn-single-loop" title="单句循环">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path><text x="12" y="15" font-size="7" font-weight="bold" fill="currentColor" text-anchor="middle">1</text></svg>
-          </button>
+      <div class="vocab-list" id="vocabListContainer">
+        <!-- Rendered dynamically -->
+      </div>
+    </main>
+
+    <!-- TAB 3: 设置与备份 (Settings) -->
+    <main class="view-panel" id="viewSettings">
+      <div class="section-header">
+        <h2 class="section-title">听读设置与数据</h2>
+      </div>
+
+      <div class="settings-box">
+        <label class="form-label">阅读底色</label>
+        <div class="theme-selector">
+          <div class="theme-pill active" data-theme-val="warm">暖阳纸</div>
+          <div class="theme-pill" data-theme-val="light">极简白</div>
+          <div class="theme-pill" data-theme-val="dark">深色夜间</div>
         </div>
 
-        <!-- Center Core Playback Actions -->
-        <div class="player-group player-group-center">
-          <button class="ctrl-btn" id="btn-rewind" title="快退 5 秒 (快捷键 ←)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="11 17 6 12 11 7"></polyline><polyline points="18 17 13 12 18 7"></polyline></svg>
-            <span class="ctrl-subtext" id="rewind-step-label">5s</span>
-          </button>
-
-          <button class="ctrl-btn-play" id="btn-play-pause" title="播放/暂停 (快捷键 空格)">
-            <svg id="icon-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg>
-            <svg id="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display: none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
-          </button>
-
-          <button class="ctrl-btn" id="btn-forward" title="快进 5 秒 (快捷键 →)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>
-            <span class="ctrl-subtext" id="forward-step-label">5s</span>
-          </button>
+        <label class="form-label" style="margin-top: 14px;">文章字体风格</label>
+        <div class="font-selector">
+          <div class="font-pill active" data-font-val="serif">优雅衬线 (Serif)</div>
+          <div class="font-pill" data-font-val="sans">现代无衬线 (Sans)</div>
         </div>
 
-        <!-- Right Advanced Actions -->
-        <div class="player-group player-group-right">
-          <!-- Playback Speed Picker -->
-          <div class="speed-picker-wrapper">
-            <button class="ctrl-btn-subtle" id="btn-speed-picker" title="调节语速">
-              <span id="current-speed-label">1.0x</span>
-            </button>
-            <div class="speed-dropdown-menu" id="speed-dropdown-menu">
-              <button class="speed-opt" data-rate="0.5">0.5x 极慢</button>
-              <button class="speed-opt" data-rate="0.75">0.75x 慢速</button>
-              <button class="speed-opt" data-rate="0.85">0.85x 稍慢</button>
-              <button class="speed-opt active" data-rate="1.0">1.0x 原速</button>
-              <button class="speed-opt" data-rate="1.15">1.15x 稍快</button>
-              <button class="speed-opt" data-rate="1.25">1.25x 加速</button>
-              <button class="speed-opt" data-rate="1.5">1.5x 快速</button>
-              <button class="speed-opt" data-rate="2.0">2.0x 极速</button>
-            </div>
-          </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px;">
+          <label class="form-label" style="margin:0;">正文字号大小</label>
+          <span id="fontSizeDisplay" style="font-size:13px; color:var(--accent); font-weight:600;">18px</span>
+        </div>
+        <input type="range" id="fontSizeSlider" min="15" max="24" value="18" step="1" style="accent-color: var(--accent); width: 100%; margin-top:8px;">
 
-          <!-- Auto Pause Toggle (for dictation & shadowing) -->
-          <button class="ctrl-btn-subtle" id="btn-auto-pause" title="单句播放完自动停顿（适合跟读/听写）">
-            <span class="btn-text-badge" id="auto-pause-label">句停</span>
-          </button>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px;">
+          <label class="form-label" style="margin:0;">句末跟读停顿</label>
+          <select id="settingAutoPauseSec" class="form-select-sm">
+            <option value="0">关闭停顿</option>
+            <option value="1">1 秒</option>
+            <option value="2" selected>2 秒 (推荐跟读)</option>
+            <option value="3">3 秒 (听写推荐)</option>
+            <option value="5">5 秒</option>
+          </select>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px;">
+          <label class="form-label" style="margin:0;">快进/快退步长</label>
+          <select id="settingRewindStep" class="form-select-sm">
+            <option value="3">3 秒</option>
+            <option value="5" selected>5 秒</option>
+            <option value="10">10 秒</option>
+          </select>
         </div>
       </div>
-    </div>
 
-    <!-- Hidden native audio element -->
-    <audio id="native-audio" preload="auto"></audio>
-
-    <!-- ==================== MODALS ==================== -->
-
-    <!-- MODAL 1: ADD / EDIT LESSON & TRANSCRIPT (新增与存储原文) -->
-    <div class="modal-backdrop" id="modal-edit-lesson">
-      <div class="modal-card modal-lg">
-        <div class="modal-header">
-          <h3 class="modal-title" id="edit-lesson-modal-title">新增听力素材与原文</h3>
-          <button class="btn-icon modal-close-btn" id="btn-close-edit-modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <form id="form-edit-lesson">
-            <input type="hidden" id="edit-lesson-id">
-            
-            <div class="form-group">
-              <label for="edit-title">素材标题 <span class="required">*</span></label>
-              <input type="text" id="edit-title" placeholder="例如：IELTS 听力精选 / The Power of Habit" required>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-6">
-                <label for="edit-category">分类 / 标签</label>
-                <input type="text" id="edit-category" placeholder="例如：日常生活、托福、演讲、美文" value="日常生活">
-              </div>
-              <div class="form-group col-6">
-                <label>音频来源方式</label>
-                <div class="source-tab-group">
-                  <button type="button" class="source-tab active" data-source="file">本地文件</button>
-                  <button type="button" class="source-tab" data-source="url">在线链接</button>
-                  <button type="button" class="source-tab" data-source="tts">智能朗读</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Audio Input Panel 1: Local File -->
-            <div class="audio-source-panel" id="panel-source-file">
-              <label>上传本地音频文件 (MP3, M4A, WAV, AAC 等)</label>
-              <div class="file-drop-zone" id="file-drop-zone">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                <p class="drop-text" id="file-drop-text">点击或将音频文件拖放到此处</p>
-                <span class="drop-subtext">音频将安全存储于浏览器本地数据库 (IndexedDB)，不耗费流量</span>
-                <input type="file" id="edit-audio-file" accept="audio/*" style="display: none;">
-              </div>
-            </div>
-
-            <!-- Audio Input Panel 2: Remote URL -->
-            <div class="audio-source-panel" id="panel-source-url" style="display: none;">
-              <label for="edit-audio-url">在线音频直链 URL</label>
-              <input type="url" id="edit-audio-url" placeholder="https://example.com/audio.mp3">
-            </div>
-
-            <!-- Audio Input Panel 3: TTS info -->
-            <div class="audio-source-panel" id="panel-source-tts" style="display: none;">
-              <div class="tts-info-box">
-                <p>🗣️ <strong>纯文本智能朗读模式</strong>：无需上传音频，系统将使用设备原生高保真英文语音引擎逐句发音与对照！</p>
-              </div>
-            </div>
-
-            <!-- Transcript Input Area (核心：听力原文存储) -->
-            <div class="form-group">
-              <div class="label-with-actions">
-                <label for="edit-transcript">听力原文 (支持纯英文、双语或带时间戳的 LRC / SRT 格式) <span class="required">*</span></label>
-                <div class="transcript-quick-tools">
-                  <button type="button" class="btn-text-action" id="btn-tool-format">🪄 智能断句规范化</button>
-                  <button type="button" class="btn-text-action" id="btn-tool-sample">📑 填入示例原文</button>
-                </div>
-              </div>
-              <textarea id="edit-transcript" rows="9" placeholder="在此粘贴或输入听力原文。
-支持格式：
-1. 纯英文句子（根据句号问号自动断句）
-2. 中英双语对照（英文下一行紧跟中文）
-3. 带时间戳格式：[00:05.20] Hello, welcome to the show." required></textarea>
-              <span class="field-hint">💡 存储后可在播放界面随时对照学习，若无时间戳亦支持跟打实时打点或按句切分。</span>
-            </div>
-
-            <div class="form-group">
-              <label for="edit-notes">学习笔记与难点记录 (可选)</label>
-              <input type="text" id="edit-notes" placeholder="记录生词、连读弱读规则、背景知识等...">
-            </div>
-
-            <div class="modal-footer">
-              <button type="button" class="btn-secondary" id="btn-cancel-edit-lesson">取消</button>
-              <button type="submit" class="btn-primary" id="btn-save-lesson">保存并开启精听</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <!-- MODAL 2: WORD LOOKUP CARD (点词即查弹窗) -->
-    <div class="modal-backdrop" id="modal-word-lookup">
-      <div class="modal-card modal-sm word-popup-card">
-        <div class="word-popup-header">
-          <div class="word-main-info">
-            <h3 class="popup-word" id="popup-word-text">word</h3>
-            <span class="popup-phonetic" id="popup-word-phonetic">/wɜːd/</span>
-          </div>
-          <button class="btn-icon" id="btn-speak-word" title="真人美音发音">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+      <!-- Backup & Restore -->
+      <div class="settings-box">
+        <label class="form-label">本地数据与备份 (100% 隐私安全)</label>
+        <p style="font-size: 12.5px; color: var(--text-muted); line-height: 1.5; margin: 4px 0 12px 0;">
+          所有听力音频（IndexedDB）与听力原文、生词完全保存在你的手机本地。一键备份迁移换设备不丢失。
+        </p>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-secondary" id="btnBackupExport" style="flex:1;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            导出完整备份
           </button>
-        </div>
-
-        <div class="popup-meanings" id="popup-word-meanings">
-          <div class="meaning-item loading">查询释义中...</div>
-        </div>
-
-        <div class="popup-sentence-ctx" id="popup-sentence-ctx">
-          <!-- Context sentence -->
-        </div>
-
-        <div class="popup-footer">
-          <button class="btn-primary w-100" id="btn-save-to-vocab">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-            <span>加入生词本</span>
+          <button class="btn-secondary" id="btnBackupImportTrigger" style="flex:1;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            导入备份恢复
           </button>
+          <input type="file" id="backupFileInput" accept=".json" style="display: none;">
         </div>
+        <button class="btn-subtle btn-sm" id="btnResetDemos" style="margin-top: 12px; width:100%; justify-content:center;">恢复官方示范素材</button>
       </div>
-    </div>
+    </main>
 
-    <!-- MODAL 3: SETTINGS & BACKUP (设置与数据备份) -->
-    <div class="modal-backdrop" id="modal-settings">
-      <div class="modal-card">
-        <div class="modal-header">
-          <h3 class="modal-title">个性化设置与数据备份</h3>
-          <button class="btn-icon modal-close-btn" id="btn-close-settings-modal">&times;</button>
-        </div>
-        <div class="modal-body settings-body">
-          <!-- Theme -->
-          <div class="setting-item">
-            <div class="setting-info">
-              <span class="setting-label">阅读配色方案</span>
-              <span class="setting-desc">精心调配的舒适护眼色彩</span>
-            </div>
-            <div class="theme-picker-group">
-              <button class="theme-pill-btn active" data-theme-val="warm">暖阳纸</button>
-              <button class="theme-pill-btn" data-theme-val="light">极简白</button>
-              <button class="theme-pill-btn" data-theme-val="dark">深邃夜</button>
-            </div>
-          </div>
+    <!-- Bottom Navigation Bar (Fixed Bottom on Main Screen) -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-tab="viewLibrary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+          <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+        </svg>
+        <span>听力库</span>
+      </button>
 
-          <!-- Typography -->
-          <div class="setting-item">
-            <div class="setting-info">
-              <span class="setting-label">排版字体</span>
-              <span class="setting-desc">经典英文衬线体 vs 现代无衬线</span>
-            </div>
-            <div class="theme-picker-group">
-              <button class="font-pill-btn active" data-font-val="serif">优雅衬线体</button>
-              <button class="font-pill-btn" data-font-val="sans">现代无衬线</button>
-            </div>
-          </div>
+      <button class="nav-item" data-tab="viewVocab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <span class="nav-badge" id="vocabBadgeCount" style="display: none;">0</span>
+        <span>生词本</span>
+      </button>
 
-          <!-- Font Size Slider -->
-          <div class="setting-item">
-            <div class="setting-info">
-              <span class="setting-label">原文正文字号</span>
-              <span class="setting-desc" id="font-size-indicator">18px</span>
-            </div>
-            <input type="range" id="setting-font-size" min="14" max="26" step="1" value="18" class="custom-range">
-          </div>
-
-          <!-- Auto Pause Seconds -->
-          <div class="setting-item">
-            <div class="setting-info">
-              <span class="setting-label">句末自动停顿时间</span>
-              <span class="setting-desc">播放完一句话后暂停等待的时间</span>
-            </div>
-            <select id="setting-auto-pause-sec" class="custom-select">
-              <option value="1">1 秒</option>
-              <option value="2" selected>2 秒 (推荐跟读)</option>
-              <option value="3">3 秒 (听写推荐)</option>
-              <option value="5">5 秒</option>
-            </select>
-          </div>
-
-          <!-- Rewind Step -->
-          <div class="setting-item">
-            <div class="setting-info">
-              <span class="setting-label">快退/快进秒数</span>
-              <span class="setting-desc">单次点击跳跃步长</span>
-            </div>
-            <select id="setting-rewind-step" class="custom-select">
-              <option value="3">3 秒</option>
-              <option value="5" selected>5 秒</option>
-              <option value="10">10 秒</option>
-            </select>
-          </div>
-
-          <!-- Data Backup & Restore -->
-          <div class="setting-item column">
-            <div class="setting-info">
-              <span class="setting-label">数据备份与迁移 (100% 本地安全)</span>
-              <span class="setting-desc">所有原文与生词保存在浏览器本地，一键备份换设备不丢失</span>
-            </div>
-            <div class="backup-btn-row">
-              <button class="btn-secondary" id="btn-backup-export">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                <span>导出完整 JSON 备份</span>
-              </button>
-              <button class="btn-secondary" id="btn-backup-import-trigger">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                <span>导入备份文件</span>
-              </button>
-              <input type="file" id="backup-file-input" accept=".json" style="display: none;">
-            </div>
-          </div>
-
-          <!-- Reset demo lessons -->
-          <div class="setting-item">
-            <div class="setting-info">
-              <span class="setting-label">重置示例课程</span>
-              <span class="setting-desc">重新载入精选官方原声示范音频</span>
-            </div>
-            <button class="btn-subtle" id="btn-reset-demos">恢复默认示例</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Toast Notification -->
-    <div class="toast-container" id="toast-container"></div>
+      <button class="nav-item" data-tab="viewSettings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+        <span>设置</span>
+      </button>
+    </nav>
   </div>
+
+  <!-- ==================== IMMERSIVE LISTENING & READING VIEW ==================== -->
+  <div class="listener-container" id="listenerContainer">
+    <!-- Header -->
+    <header class="listener-header">
+      <button class="btn-icon" id="btnListenerBack" title="返回听力库">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </button>
+
+      <span class="listener-header-title" id="listenerHeaderTitle">
+        听力精听
+      </span>
+
+      <div class="listener-header-actions">
+        <!-- Blind listening toggle pill -->
+        <button class="header-pill-btn" id="btnToggleBlind" title="切换「对照模式 / 盲听遮蔽模式」">
+          <span id="blindModeLabel">🙈 盲听</span>
+        </button>
+        <!-- Translation toggle pill -->
+        <button class="header-pill-btn" id="btnToggleTrans" title="显示/隐藏中文译文">
+          <span id="transModeLabel">译</span>
+        </button>
+        <!-- Dictation bottom sheet trigger -->
+        <button class="header-pill-btn" id="btnToggleDictation" title="打开听写核对抽屉">
+          <span>✍️ 听写</span>
+        </button>
+        <!-- Edit modal trigger -->
+        <button class="btn-icon-subtle" id="btnEditCurrent" title="编辑当前原文">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Pure Immersive Content (Clean Sentences Stream) -->
+    <div class="listener-content" id="listenerContentArea">
+      <div class="sentences-stream" id="sentencesStream">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- Compact Floating Bottom Player Bar -->
+    <div class="listener-player-bar" id="listenerPlayerBar">
+      <!-- Slim Timeline Scrubber -->
+      <div class="player-timeline" id="playerTimeline">
+        <span class="time-label" id="timeCurrent">00:00</span>
+        <div class="timeline-bar" id="timelineBar">
+          <div class="timeline-buffered" id="timelineBuffered"></div>
+          <div class="timeline-progress" id="timelineProgress"></div>
+          <div class="timeline-ab" id="timelineAb"></div>
+          <div class="timeline-thumb" id="timelineThumb"></div>
+        </div>
+        <span class="time-label" id="timeDuration">00:00</span>
+      </div>
+
+      <!-- Controls Row -->
+      <div class="player-controls">
+        <!-- Rewind 5s -->
+        <button class="p-ctrl-btn" id="btnRewind" title="快退 5 秒">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="11 17 6 12 11 7"></polyline><polyline points="18 17 13 12 18 7"></polyline></svg>
+          <span class="p-sub" id="pRewindLabel">5s</span>
+        </button>
+
+        <!-- Main Play/Pause -->
+        <button class="p-play-btn" id="btnPlayPause" title="播放/暂停">
+          <svg id="iconPlay" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg>
+          <svg id="iconPause" viewBox="0 0 24 24" fill="currentColor" style="display: none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+        </button>
+
+        <!-- Forward 5s -->
+        <button class="p-ctrl-btn" id="btnForward" title="快进 5 秒">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>
+          <span class="p-sub" id="pForwardLabel">5s</span>
+        </button>
+
+        <!-- Loop Mode (Sequential / Single / A-B) -->
+        <button class="p-opt-btn" id="btnLoopMode" title="切换循环模式 (顺序 / 单句 / A-B)">
+          <span id="loopModeIcon">🔁</span>
+          <span id="loopModeText">单句</span>
+        </button>
+
+        <!-- Speed Dropdown -->
+        <div class="speed-picker-box">
+          <button class="p-opt-btn" id="btnSpeedPicker" title="调节语速">
+            <span id="speedValueLabel">1.0x</span>
+          </button>
+          <div class="speed-menu" id="speedMenu">
+            <button class="speed-item" data-rate="0.75">0.75x</button>
+            <button class="speed-item" data-rate="0.85">0.85x</button>
+            <button class="speed-item active" data-rate="1.0">1.0x</button>
+            <button class="speed-item" data-rate="1.15">1.15x</button>
+            <button class="speed-item" data-rate="1.25">1.25x</button>
+            <button class="speed-item" data-rate="1.5">1.5x</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== DICTATION DRAWER (BOTTOM SHEET) ==================== -->
+  <div class="bottom-sheet-backdrop" id="dictationBackdrop"></div>
+  <div class="bottom-sheet" id="dictationSheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-header">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="font-weight:700; font-size:15px; color:var(--text-primary);">✍️ 听写核对</span>
+        <span class="sheet-badge" id="dictationStepBadge">句 1/4</span>
+      </div>
+      <div style="display:flex; gap:6px;">
+        <button class="btn-subtle btn-sm" id="btnDictationReplay">▶ 重放本句</button>
+        <button class="btn-subtle btn-sm" id="btnDictationClose">✕ 关闭</button>
+      </div>
+    </div>
+    <div class="sheet-body">
+      <textarea id="dictationTextarea" rows="3" placeholder="在此输入你听到的英文句子，听完后点击下方「核对对照」..." class="dictation-input"></textarea>
+      
+      <div style="display:flex; gap:10px; margin-top:10px;">
+        <button class="btn-primary" id="btnDictationCheck" style="flex:1;">
+          核对对照
+        </button>
+        <button class="btn-secondary" id="btnDictationNext" style="flex:1;">
+          下一句 ➔
+        </button>
+      </div>
+
+      <!-- Diff result -->
+      <div class="dictation-diff-box" id="dictationDiffBox" style="display: none;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+          <span style="font-size:12.5px; font-weight:600; color:var(--text-secondary);">核对对比</span>
+          <span class="sheet-badge" id="diffScoreBadge">准确率: 0%</span>
+        </div>
+        <div class="diff-view-content" id="diffViewContent"></div>
+        <div class="diff-view-trans" id="diffViewTrans"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== WORD INSPECTOR BOTTOM SHEET ==================== -->
+  <div class="bottom-sheet-backdrop" id="wordBackdrop"></div>
+  <div class="bottom-sheet" id="wordBottomSheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-header">
+      <div style="display:flex; align-items:baseline; gap:8px;">
+        <h3 class="sheet-word-title" id="sheetWordTitle">word</h3>
+        <span class="sheet-phonetic" id="sheetWordPhonetic">/wɜːd/</span>
+      </div>
+      <button class="btn-icon" id="btnSpeakWord" title="美音发音">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+      </button>
+    </div>
+    <div class="sheet-body">
+      <div class="sheet-meanings" id="sheetWordMeanings">
+        <div class="meaning-item loading">查询中...</div>
+      </div>
+      <div class="sheet-sentence-ctx" id="sheetSentenceCtx"></div>
+      <button class="btn-primary w-100" id="btnSaveToVocab" style="margin-top:14px;">
+        加入生词本
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== ADD / EDIT LESSON MODAL ==================== -->
+  <div class="modal-backdrop" id="modalEditLesson">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="editLessonModalTitle">新增听力素材与原文</h3>
+        <button class="btn-icon modal-close-btn" id="btnCloseEditModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="formEditLesson">
+          <input type="hidden" id="editLessonId">
+          
+          <div class="form-group">
+            <label for="editTitle">素材标题 <span class="required">*</span></label>
+            <input type="text" id="editTitle" placeholder="例如：IELTS 听力精选 / The Power of Habit" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="editCategory">分类 / 标签</label>
+              <input type="text" id="editCategory" placeholder="日常学习" value="日常学习">
+            </div>
+            <div class="form-group col-6">
+              <label>音频来源</label>
+              <div class="source-tab-group">
+                <button type="button" class="source-tab active" data-source="file">本地文件</button>
+                <button type="button" class="source-tab" data-source="url">在线链接</button>
+                <button type="button" class="source-tab" data-source="tts">智能朗读</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- File Upload Panel -->
+          <div class="audio-source-panel" id="panelSourceFile">
+            <div class="file-drop-zone" id="fileDropZone">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+              <p class="drop-text" id="fileDropText">点击或拖放音频文件 (MP3, M4A, WAV)</p>
+              <span class="drop-subtext">保存在本地数据库 (IndexedDB)，安全不耗流量</span>
+              <input type="file" id="editAudioFile" accept="audio/*" style="display: none;">
+            </div>
+          </div>
+
+          <!-- Online URL Panel -->
+          <div class="audio-source-panel" id="panelSourceUrl" style="display: none;">
+            <input type="url" id="editAudioUrl" placeholder="https://example.com/audio.mp3">
+          </div>
+
+          <!-- TTS Panel -->
+          <div class="audio-source-panel" id="panelSourceTts" style="display: none;">
+            <div class="tts-info-box">
+              <p>🗣️ <strong>纯文本智能朗读模式</strong>：无需音频，自动调用原生高保真英文引擎逐句朗读与对照！</p>
+            </div>
+          </div>
+
+          <!-- Transcript Input (存原文核心) -->
+          <div class="form-group">
+            <div class="label-with-actions">
+              <label for="editTranscript">听力原文 (支持纯英文、双语或 LRC 格式) <span class="required">*</span></label>
+              <div class="transcript-quick-tools">
+                <button type="button" class="btn-text-action" id="btnToolFormat">🪄 智能断句</button>
+                <button type="button" class="btn-text-action" id="btnToolSample">📑 示范模板</button>
+              </div>
+            </div>
+            <textarea id="editTranscript" rows="8" placeholder="在此粘贴或输入听力原文。
+支持格式：
+1. 纯英文句子（根据标点自动分句）
+2. 中英双语对照（英文下一行紧跟中文）
+3. 带时间戳：[00:05.20] Hello, welcome to the show." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="editNotes">学习笔记 (可选)</label>
+            <input type="text" id="editNotes" placeholder="记录生词、连读弱读规则、背景等...">
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn-secondary" id="btnCancelEditLesson">取消</button>
+            <button type="submit" class="btn-primary" id="btnSaveLesson">保存并开启精听</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden native audio element -->
+  <audio id="nativeAudio" preload="auto"></audio>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
 
   <script src="app.js"></script>
 </body>
